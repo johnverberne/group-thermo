@@ -1,0 +1,23 @@
+{
+  "name": "thermo-server",
+  "version": "1.0.0",
+  "description": "Vue Thermo met Express en Socket.IO",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "frontend:install": "npm install --prefix vue-thermo",
+    "frontend:dev": "npm run dev --prefix vue-thermo",
+    "backend:dev": "node --watch server.js",
+    "dev": "concurrently \"npm run backend:dev\" \"npm run frontend:dev\"",
+    "build": "npm run build --prefix vue-thermo",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "socket.io": "^4.8.3"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
