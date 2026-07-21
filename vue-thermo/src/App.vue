@@ -60,7 +60,7 @@ import { onMounted, onUnmounted, reactive, ref } from 'vue';
 import { io } from 'socket.io-client';
 import Thermometer from './components/Thermometer.vue';
 
-const socket = io('http://localhost:3000');
+const socket = io();
 
 const hasVoted = ref(false);
 const totalVotes = ref(0);
