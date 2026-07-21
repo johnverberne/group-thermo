@@ -1,9 +1,9 @@
 <template>
   <main class="container">
-    <h1>Groepsmeting</h1>
+    <h1>Group Measurement</h1>
 
     <section class="date-controls">
-      <label for="date-picker">Score dag:</label>
+      <label for="date-picker">Score date:</label>
       <select id="date-picker" v-model="selectedDate" @change="onDateChange">
         <option v-for="date in availableDates" :key="date" :value="date">
           {{ formatDate(date) }}{{ date === todayKey ? ' (vandaag)' : '' }}
@@ -11,7 +11,7 @@
       </select>
     </section>
 
-    <p>Aantal inzendingen: <strong>{{ totalVotes }}</strong></p>
+    <p>Number of submissions: <strong>{{ totalVotes }}</strong></p>
 
     <section class="thermometers-grid">
       <Thermometer label="Workload" :score="scores.workload">
@@ -35,22 +35,22 @@
     </section>
 
     <section v-if="canVote && !hasVoted" class="vote-form">
-      <h2>Jouw beoordeling (1 = Laag, 5 = Hoog)</h2>
+      <h2>Your rating (1 = Low, 5 = High)</h2>
 
       <div v-for="(val, topic) in myVote" :key="topic" class="input-group">
         <label>{{ formatLabel(topic) }}: {{ val }}</label>
         <input type="range" min="1" max="5" v-model.number="myVote[topic]" />
       </div>
 
-      <button @click="sendVote" class="btn-primary">Verstuur anoniem</button>
+      <button @click="sendVote" class="btn-primary">Submit anonymously</button>
     </section>
 
     <div v-else-if="canVote && hasVoted" class="thank-you">
-      <p>Bedankt! Je stem is anoniem verwerkt.</p>
+      <p>Thank you! Your vote has been submitted anonymously.</p>
     </div>
 
     <div v-else class="historic-note">
-      <p>Je bekijkt historische data. Stemmen kan alleen voor vandaag.</p>
+      <p>You are viewing historical data. Voting is only possible for today.</p>
     </div>
   </main>
 </template>
