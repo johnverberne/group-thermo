@@ -5,6 +5,7 @@
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
+    "postinstall": "npm install --prefix vue-thermo",
     "frontend:install": "npm install --prefix vue-thermo",
     "frontend:dev": "npm run dev --prefix vue-thermo",
     "backend:dev": "node --watch server.js",
