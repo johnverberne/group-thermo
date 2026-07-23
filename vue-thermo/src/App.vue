@@ -51,6 +51,7 @@
     </div>
 
     <div v-else class="historic-note">
+      <p>Scale 1 = low to 5 = high</p>
       <p>You are viewing historical data. Voting is only possible for today.</p>
     </div>
   </main>
