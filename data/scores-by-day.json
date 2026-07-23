@@ -1,46 +1,18 @@
 {
   "2026-07-21": {
-    "workload": [
-      3,
-      3,
-      3,
-      1,
-      5
-    ],
-    "focusTime": [
-      3,
-      3,
-      3,
-      2,
-      4
-    ],
-    "contextSwitching": [
-      3,
-      3,
-      3,
-      2,
-      5
-    ],
-    "morale": [
-      3,
-      3,
-      3,
-      3,
-      1
-    ],
-    "stress": [
-      3,
-      3,
-      3,
-      5,
-      1
-    ],
-    "happiness": [
-      3,
-      3,
-      3,
-      5,
-      1
-    ]
+    "workload": [3, 3, 3, 1, 5],
+    "focusTime": [3, 3, 3, 2, 4],
+    "contextSwitching": [3, 3, 3, 2, 5],
+    "morale": [3, 3, 3, 3, 1],
+    "stress": [3, 3, 3, 5, 1],
+    "happiness": [3, 3, 3, 5, 1]
+  },
+  "2026-07-22": {
+    "workload": [5],
+    "focusTime": [2],
+    "contextSwitching": [3],
+    "morale": [1],
+    "stress": [1],
+    "happiness": [5]
   }
 }
