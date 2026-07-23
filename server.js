@@ -184,5 +184,5 @@ app.get(/^(?!\/socket\.io(?:\/|$)|\/api(?:\/|$)).*/, (req, res) => {
 });
 
 server.listen(port, () => {
-  console.log(`Server draait op http://localhost:${port}`);
+  console.log(`Server draait op port : ${port}`);
 });
