@@ -46,6 +46,7 @@
     </section>
 
     <div v-else-if="canVote && hasVoted" class="thank-you">
+      <p>Scale 1 = low to 5 = high</p>
       <p>Thank you! Your vote has been submitted anonymously.</p>
     </div>
 

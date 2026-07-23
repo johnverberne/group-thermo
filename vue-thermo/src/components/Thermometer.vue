@@ -7,10 +7,6 @@
         <span class="score-label">{{ score }}</span>
       </div>
     </div>
-    <div class="scale">
-      <span>5</span>
-      <span>1</span>
-    </div>
   </div>
 </template>
 
