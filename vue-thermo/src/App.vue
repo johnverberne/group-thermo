@@ -223,7 +223,7 @@ const formatDate = (dateKey) => {
 
 .thermometers-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 1.5rem;
   margin: 2rem 0;
 }
@@ -237,14 +237,21 @@ const formatDate = (dateKey) => {
 }
 
 .input-group {
-  margin: 1rem 0;
+  margin: 1.15rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.55rem;
+}
+
+.input-group label {
+  margin: 0;
+  line-height: 1.3;
 }
 
 .input-group input {
   width: 60%;
+  margin: 0;
 }
 
 button {

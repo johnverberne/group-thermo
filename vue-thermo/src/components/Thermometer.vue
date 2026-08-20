@@ -1,7 +1,9 @@
 <template>
   <div class="thermometer-card">
     <h3>{{ label }}</h3>
-    <slot></slot>
+    <p class="description">
+      <slot></slot>
+    </p>
     <div class="meter-outer">
       <div class="meter-container">
         <div class="meter-fill" :style="{ height: fillPercentage + '%' }">
@@ -13,7 +15,7 @@
         class="range-marker"
         :style="{ bottom: markerPosition(high) + '%' }"
       >
-        <span class="marker-value">{{ high }} ×{{ highCount }}</span>
+        <span class="marker-value marker-value--right">{{ high }} ×{{ highCount }}</span>
       </div>
       <template v-else>
         <div
@@ -21,14 +23,14 @@
           class="range-marker"
           :style="{ bottom: markerPosition(high) + '%' }"
         >
-          <span class="marker-value">{{ high }} ×{{ highCount }}</span>
+          <span class="marker-value marker-value--right">{{ high }} ×{{ highCount }}</span>
         </div>
         <div
           v-if="low > 0"
           class="range-marker"
           :style="{ bottom: markerPosition(low) + '%' }"
         >
-          <span class="marker-value">{{ low }} ×{{ lowCount }}</span>
+          <span class="marker-value marker-value--left">{{ low }} ×{{ lowCount }}</span>
         </div>
       </template>
     </div>
@@ -84,19 +86,37 @@ const markerPosition = (value) => {
   flex-direction: column;
   align-items: center;
   background: #f8f9fa;
-  padding: 1.5rem;
+  padding: 1.5rem 1.25rem;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+h3 {
+  margin: 0 0 0.4rem;
+  line-height: 1.25;
+}
+
+.description {
+  margin: 0 0 1.25rem;
+  padding: 0 0.25rem;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  color: #444;
+  min-height: 2.7em;
 }
 
 .meter-outer {
   position: relative;
   width: 40px;
   height: 200px;
+  margin-top: 0.35rem;
+  padding-left: 2.75rem;
+  padding-right: 2.75rem;
+  box-sizing: content-box;
 }
 
 .meter-container {
-  width: 100%;
+  width: 40px;
   height: 100%;
   background: #e0e0e0;
   border-radius: 20px;
@@ -124,8 +144,8 @@ const markerPosition = (value) => {
 
 .range-marker {
   position: absolute;
-  left: -6px;
-  width: calc(100% + 12px);
+  left: calc(2.75rem - 6px);
+  width: calc(40px + 12px);
   height: 2px;
   background: #1a1a1a;
   border-radius: 1px;
@@ -135,7 +155,6 @@ const markerPosition = (value) => {
 
 .marker-value {
   position: absolute;
-  left: calc(100% + 4px);
   top: 50%;
   transform: translateY(-50%);
   font-size: 0.7rem;
@@ -143,5 +162,13 @@ const markerPosition = (value) => {
   color: #1a1a1a;
   line-height: 1;
   white-space: nowrap;
+}
+
+.marker-value--right {
+  left: calc(100% + 6px);
+}
+
+.marker-value--left {
+  right: calc(100% + 6px);
 }
 </style>
