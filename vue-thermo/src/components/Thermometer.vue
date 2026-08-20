@@ -13,7 +13,7 @@
         class="range-marker"
         :style="{ bottom: markerPosition(high) + '%' }"
       >
-        <span class="marker-value">{{ high }}</span>
+        <span class="marker-value">{{ high }} ×{{ highCount }}</span>
       </div>
       <template v-else>
         <div
@@ -21,14 +21,14 @@
           class="range-marker"
           :style="{ bottom: markerPosition(high) + '%' }"
         >
-          <span class="marker-value">{{ high }}</span>
+          <span class="marker-value">{{ high }} ×{{ highCount }}</span>
         </div>
         <div
           v-if="low > 0"
           class="range-marker"
           :style="{ bottom: markerPosition(low) + '%' }"
         >
-          <span class="marker-value">{{ low }}</span>
+          <span class="marker-value">{{ low }} ×{{ lowCount }}</span>
         </div>
       </template>
     </div>
@@ -50,6 +50,14 @@ const props = defineProps({
     default: 0
   },
   low: {
+    type: Number,
+    default: 0
+  },
+  highCount: {
+    type: Number,
+    default: 0
+  },
+  lowCount: {
     type: Number,
     default: 0
   },

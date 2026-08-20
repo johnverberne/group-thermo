@@ -108,6 +108,8 @@ function getAveragesForDate(dateKey) {
   const averages = {};
   const highs = {};
   const lows = {};
+  const highCounts = {};
+  const lowCounts = {};
 
   for (const topic in votes) {
     const scores = votes[topic];
@@ -116,11 +118,15 @@ function getAveragesForDate(dateKey) {
       averages[topic] = 0;
       highs[topic] = 0;
       lows[topic] = 0;
+      highCounts[topic] = 0;
+      lowCounts[topic] = 0;
     } else {
       const sum = scores.reduce((a, b) => a + b, 0);
       averages[topic] = Math.round((sum / scores.length) * 10) / 10;
       highs[topic] = Math.max(...scores);
       lows[topic] = Math.min(...scores);
+      highCounts[topic] = scores.filter((score) => score === highs[topic]).length;
+      lowCounts[topic] = scores.filter((score) => score === lows[topic]).length;
     }
   }
 
@@ -131,6 +137,8 @@ function getAveragesForDate(dateKey) {
     averages,
     highs,
     lows,
+    highCounts,
+    lowCounts,
     totalVotes: votes.workload.length,
     canVote: dateKey === getTodayKey()
   };

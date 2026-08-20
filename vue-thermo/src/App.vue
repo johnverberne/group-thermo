@@ -14,22 +14,64 @@
     <p>Number of submissions: <strong>{{ totalVotes }}</strong></p>
 
     <section class="thermometers-grid">
-      <Thermometer label="Workload" :score="scores.workload" :high="highs.workload" :low="lows.workload">
+      <Thermometer
+        label="Workload"
+        :score="scores.workload"
+        :high="highs.workload"
+        :low="lows.workload"
+        :high-count="highCounts.workload"
+        :low-count="lowCounts.workload"
+      >
         What is the group's workload like?
       </Thermometer>
-      <Thermometer label="Focus Time" :score="scores.focusTime" :high="highs.focusTime" :low="lows.focusTime">
+      <Thermometer
+        label="Focus Time"
+        :score="scores.focusTime"
+        :high="highs.focusTime"
+        :low="lows.focusTime"
+        :high-count="highCounts.focusTime"
+        :low-count="lowCounts.focusTime"
+      >
         What is the group's focus time like?
       </Thermometer>
-      <Thermometer label="Context Switching" :score="scores.contextSwitching" :high="highs.contextSwitching" :low="lows.contextSwitching">
+      <Thermometer
+        label="Context Switching"
+        :score="scores.contextSwitching"
+        :high="highs.contextSwitching"
+        :low="lows.contextSwitching"
+        :high-count="highCounts.contextSwitching"
+        :low-count="lowCounts.contextSwitching"
+      >
         How often does the group switch contexts?
       </Thermometer>
-      <Thermometer label="Morale" :score="scores.morale" :high="highs.morale" :low="lows.morale">
+      <Thermometer
+        label="Morale"
+        :score="scores.morale"
+        :high="highs.morale"
+        :low="lows.morale"
+        :high-count="highCounts.morale"
+        :low-count="lowCounts.morale"
+      >
         What is the group's morale level?
       </Thermometer>
-      <Thermometer label="Happiness" :score="scores.happiness" :high="highs.happiness" :low="lows.happiness">
+      <Thermometer
+        label="Happiness"
+        :score="scores.happiness"
+        :high="highs.happiness"
+        :low="lows.happiness"
+        :high-count="highCounts.happiness"
+        :low-count="lowCounts.happiness"
+      >
         What is the group's happiness level?
       </Thermometer>
-      <Thermometer label="Work environment" :score="scores.stress" :high="highs.stress" :low="lows.stress">
+      <Thermometer
+        label="Work environment"
+        :score="scores.stress"
+        :high="highs.stress"
+        :low="lows.stress"
+        :high-count="highCounts.stress"
+        :low-count="lowCounts.stress"
+      >
         What is your work environment like?
       </Thermometer>
     </section>
@@ -83,6 +125,8 @@ const emptyTopicScores = () => ({
 const scores = reactive(emptyTopicScores());
 const highs = reactive(emptyTopicScores());
 const lows = reactive(emptyTopicScores());
+const highCounts = reactive(emptyTopicScores());
+const lowCounts = reactive(emptyTopicScores());
 
 const myVote = reactive({
   workload: 3,
@@ -97,6 +141,8 @@ function applyScores(data) {
   Object.assign(scores, data.averages);
   Object.assign(highs, data.highs || emptyTopicScores());
   Object.assign(lows, data.lows || emptyTopicScores());
+  Object.assign(highCounts, data.highCounts || emptyTopicScores());
+  Object.assign(lowCounts, data.lowCounts || emptyTopicScores());
   totalVotes.value = data.totalVotes;
   canVote.value = data.canVote;
 }
