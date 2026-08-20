@@ -14,22 +14,22 @@
     <p>Number of submissions: <strong>{{ totalVotes }}</strong></p>
 
     <section class="thermometers-grid">
-      <Thermometer label="Workload" :score="scores.workload">
+      <Thermometer label="Workload" :score="scores.workload" :high="highs.workload" :low="lows.workload">
         What is the group's workload like?
       </Thermometer>
-      <Thermometer label="Focus Time" :score="scores.focusTime">
+      <Thermometer label="Focus Time" :score="scores.focusTime" :high="highs.focusTime" :low="lows.focusTime">
         What is the group's focus time like?
       </Thermometer>
-      <Thermometer label="Context Switching" :score="scores.contextSwitching">
+      <Thermometer label="Context Switching" :score="scores.contextSwitching" :high="highs.contextSwitching" :low="lows.contextSwitching">
         How often does the group switch contexts?
       </Thermometer>
-      <Thermometer label="Morale" :score="scores.morale">
+      <Thermometer label="Morale" :score="scores.morale" :high="highs.morale" :low="lows.morale">
         What is the group's morale level?
       </Thermometer>
-      <Thermometer label="Happiness" :score="scores.happiness">
+      <Thermometer label="Happiness" :score="scores.happiness" :high="highs.happiness" :low="lows.happiness">
         What is the group's happiness level?
       </Thermometer>
-      <Thermometer label="Work environment" :score="scores.stress">
+      <Thermometer label="Work environment" :score="scores.stress" :high="highs.stress" :low="lows.stress">
         What is your work environment like?
       </Thermometer>
     </section>
@@ -71,7 +71,7 @@ const selectedDate = ref('');
 const todayKey = ref('');
 const availableDates = ref([]);
 
-const scores = reactive({
+const emptyTopicScores = () => ({
   workload: 0,
   focusTime: 0,
   contextSwitching: 0,
@@ -79,6 +79,10 @@ const scores = reactive({
   happiness: 0,
   stress: 0
 });
+
+const scores = reactive(emptyTopicScores());
+const highs = reactive(emptyTopicScores());
+const lows = reactive(emptyTopicScores());
 
 const myVote = reactive({
   workload: 3,
@@ -91,6 +95,8 @@ const myVote = reactive({
 
 function applyScores(data) {
   Object.assign(scores, data.averages);
+  Object.assign(highs, data.highs || emptyTopicScores());
+  Object.assign(lows, data.lows || emptyTopicScores());
   totalVotes.value = data.totalVotes;
   canVote.value = data.canVote;
 }

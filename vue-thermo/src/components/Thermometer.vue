@@ -2,10 +2,35 @@
   <div class="thermometer-card">
     <h3>{{ label }}</h3>
     <slot></slot>
-    <div class="meter-container">
-      <div class="meter-fill" :style="{ height: fillPercentage + '%' }">
-        <span class="score-label">{{ score }}</span>
+    <div class="meter-outer">
+      <div class="meter-container">
+        <div class="meter-fill" :style="{ height: fillPercentage + '%' }">
+          <span class="score-label">{{ score }}</span>
+        </div>
       </div>
+      <div
+        v-if="sameRange"
+        class="range-marker"
+        :style="{ bottom: markerPosition(high) + '%' }"
+      >
+        <span class="marker-value">{{ high }}</span>
+      </div>
+      <template v-else>
+        <div
+          v-if="high > 0"
+          class="range-marker"
+          :style="{ bottom: markerPosition(high) + '%' }"
+        >
+          <span class="marker-value">{{ high }}</span>
+        </div>
+        <div
+          v-if="low > 0"
+          class="range-marker"
+          :style="{ bottom: markerPosition(low) + '%' }"
+        >
+          <span class="marker-value">{{ low }}</span>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -20,6 +45,14 @@ const props = defineProps({
     type: Number,
     default: 0
   },
+  high: {
+    type: Number,
+    default: 0
+  },
+  low: {
+    type: Number,
+    default: 0
+  },
   maxScore: {
     type: Number,
     default: 5
@@ -29,6 +62,12 @@ const props = defineProps({
 const fillPercentage = computed(() => {
   return Math.min(100, Math.max(0, (props.score / props.maxScore) * 100));
 });
+
+const sameRange = computed(() => props.high > 0 && props.high === props.low);
+
+const markerPosition = (value) => {
+  return Math.min(100, Math.max(0, (value / props.maxScore) * 100));
+};
 </script>
 
 <style scoped>
@@ -42,9 +81,15 @@ const fillPercentage = computed(() => {
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
-.meter-container {
+.meter-outer {
+  position: relative;
   width: 40px;
   height: 200px;
+}
+
+.meter-container {
+  width: 100%;
+  height: 100%;
   background: #e0e0e0;
   border-radius: 20px;
   position: relative;
@@ -67,5 +112,28 @@ const fillPercentage = computed(() => {
   color: white;
   font-weight: bold;
   font-size: 0.85rem;
+}
+
+.range-marker {
+  position: absolute;
+  left: -6px;
+  width: calc(100% + 12px);
+  height: 2px;
+  background: #1a1a1a;
+  border-radius: 1px;
+  z-index: 2;
+  transform: translateY(50%);
+}
+
+.marker-value {
+  position: absolute;
+  left: calc(100% + 4px);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1;
+  white-space: nowrap;
 }
 </style>
